@@ -1,19 +1,18 @@
 import RelatedVideoListItem from "./RelatedVideoListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { fetchVideo } from "../../features/video/videoSlice";
 import { fetchRelatedVideos } from "../../features/relatedVideos/relatedVideosSlice";
 import Loading from "../ui/Loading";
 const RelatedVideoList = ({ tags, currentVideoId }) => {
   const { relatedVideos, isLoading, isError, error } = useSelector(
     (state) => state.relatedVideos
   );
-  console.log(relatedVideos);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchRelatedVideos({ tags, currentVideoId }));
-  }, [dispatch, currentVideoId]);
+  }, [dispatch, currentVideoId, tags]);
+
   let content = null;
   if (isLoading) {
     content = <Loading />;
