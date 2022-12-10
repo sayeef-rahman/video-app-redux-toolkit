@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Search() {
-  const [input, setInput] = useState("");
-  const handleInput = (e) => {
-    console.log(e);
-  };
+  const { search } = useSelector((state) => state.filter);
+  const [input, setInput] = useState(search);
+  console.log("search: ", search);
+
   return (
     <form>
       <input
@@ -12,8 +13,8 @@ export default function Search() {
         type="search"
         name="search"
         placeholder="Search"
-        // value={input}
-        onChange={(e) => handleInput(e)}
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
       />
     </form>
   );
